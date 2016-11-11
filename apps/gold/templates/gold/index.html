@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Ninha Gold</title>
+
+        <style>
+        #your {
+            display: inline-block;
+            background-color: green;
+            border-radius: 10px;
+        }
+
+        #stuffyadone h6{
+            text-align: center;
+            color: rgb(224, 2, 147);
+        }
+        .building{
+            display: inline-block;
+            border: 1px solid black;
+            color: lightblue;
+        }
+
+        form{
+
+        }
+
+        input[type=submit] {
+        display: inline-block;
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        }
+
+        input{
+            color: blue;
+        }
+        </style>
+
+    </head>
+    <body>
+        <div id="your"</div>
+        <h3>Your Gold : Earned: {{request.session.gold}}</h3>
+
+        <div class="building">
+        <h5>Farm (earns 10-20 gold)</h5>
+        <form action="/process_money" method="POST">
+        {% csrf_token %}
+            <input type="hidden" name="building" value="farm">
+            <input type="submit" value="find Gold">
+        </form>
+        </div>
+
+        <div class="building">
+        <h5>Cave (earns 5-10 gold)</h5>
+        <form action="/process_money" method="POST">
+        {% csrf_token %}
+            <input type="hidden" name="building" value="cave">
+            <input type="submit" value="find Gold">
+        </form>
+        </div>
+
+        <div class="building">
+        <h5>House (earns 2-5 gold)</h5>
+        <form action="/process_money" method="POST">
+        {% csrf_token %}
+            <input type="hidden" name="building" value="house">
+            <input type="submit" value="find Gold">
+        </form>
+        </div>
+
+        <div class="building">
+        <h5>Casino (earns -50-50 gold)</h5>
+        <form action="/process_money" method="POST">
+        {% csrf_token %}
+            <input type="hidden" name="building" value="casino">
+            <input type="submit" value="find Gold">
+        </form>
+        </div>
+
+        <div id="stuffyadone">
+        {% for stuff in request.session.activity %}
+
+        <h6>{{stuff}}</h6>
+        {% endfor %}
+    </div>
+    <a href="/reset"><button>Reset</button>
+    </body>
+</html>
